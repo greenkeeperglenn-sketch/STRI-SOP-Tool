@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
-import { eq, ne, ilike, or } from "drizzle-orm";
+import { eq, ilike, or } from "drizzle-orm";
 import { hash } from "bcryptjs";
 import { z } from "zod";
 import { requireAuth, requireRole } from "@/lib/auth/utils";

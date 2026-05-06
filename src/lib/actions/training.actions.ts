@@ -8,7 +8,7 @@ import {
   documentVersions,
   users,
 } from "@/lib/db/schema";
-import { eq, and, desc, sql, isNull } from "drizzle-orm";
+import { eq, and, desc } from "drizzle-orm";
 import { z } from "zod";
 import { requireAuth, requireRole } from "@/lib/auth/utils";
 import { createAuditLog } from "./audit.actions";

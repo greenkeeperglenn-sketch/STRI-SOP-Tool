@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { auditLog } from "@/lib/db/schema";
-import { desc, eq } from "drizzle-orm";
+import { auditLog, users } from "@/lib/db/schema";
+import { desc, eq, and } from "drizzle-orm";
 import type { ActionResult, AuditLogWithUser } from "@/lib/types";
 
 export async function createAuditLog(params: {
@@ -27,12 +27,17 @@ export async function getAuditLogs(params?: {
   entityId?: string;
 }): Promise<ActionResult<AuditLogWithUser[]>> {
   try {
-    const { users } = await import("@/lib/db/schema");
-    const { sql } = await import("drizzle-orm");
-
     const limit = params?.limit ?? 100;
 
-    let query = db
+    const conditions = [];
+    if (params?.entityType) {
+      conditions.push(eq(auditLog.entityType, params.entityType));
+    }
+    if (params?.entityId) {
+      conditions.push(eq(auditLog.entityId, params.entityId));
+    }
+
+    const logs = await db
       .select({
         id: auditLog.id,
         userId: auditLog.userId,
@@ -49,10 +54,9 @@ export async function getAuditLogs(params?: {
       })
       .from(auditLog)
       .leftJoin(users, eq(auditLog.userId, users.id))
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
       .orderBy(desc(auditLog.timestamp))
       .limit(limit);
-
-    const logs = await query;
 
     return {
       success: true,

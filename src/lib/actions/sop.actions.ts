@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { documents, documentVersions, users } from "@/lib/db/schema";
+import { documents, documentVersions, users, trainingAssignments, trainingAcknowledgements } from "@/lib/db/schema";
 import { eq, desc, ilike, or, and, lt, sql } from "drizzle-orm";
 import { z } from "zod";
 import { requireAuth, requireRole } from "@/lib/auth/utils";
@@ -392,8 +392,6 @@ export async function getDashboardStats() {
       );
 
     // Training stats
-    const { trainingAssignments, trainingAcknowledgements } = await import("@/lib/db/schema");
-
     const [{ count: totalAssignments }] = await db
       .select({ count: sql<number>`count(*)` })
       .from(trainingAssignments);

@@ -10,7 +10,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx src/lib/db/seed.ts"
   },
   "dependencies": {
     "next": "14.2.5",
@@ -20,7 +21,6 @@
     "@auth/drizzle-adapter": "^1.4.2",
     "drizzle-orm": "^0.33.0",
     "@neondatabase/serverless": "^0.9.4",
-    "drizzle-orm": "^0.33.0",
     "@vercel/blob": "^0.23.4",
     "bcryptjs": "^2.4.3",
     "zod": "^3.23.8",
@@ -40,7 +40,6 @@
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-separator": "^1.1.0",
-    "@radix-ui/react-sheet": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
@@ -58,6 +57,7 @@
     "postcss": "^8.4.45",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.5",
-    "drizzle-kit": "^0.24.0"
+    "drizzle-kit": "^0.24.0",
+    "tsx": "^4.16.2"
   }
 }
