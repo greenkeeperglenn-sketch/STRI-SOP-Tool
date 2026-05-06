@@ -58,7 +58,7 @@ export function Sidebar({ user, onClose }: SidebarProps) {
 
   const visibleItems = navItems.filter((item) => {
     if (!item.roles) return true;
-    return item.roles.includes(user.role as "admin" | "manager");
+    return (item.roles as string[]).includes(user.role);
   });
 
   return (
